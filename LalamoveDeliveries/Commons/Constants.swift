@@ -15,6 +15,7 @@ struct Constants {
     
     struct ServerConfig {
         static let ServerAPIUrl = "http://52.74.166.11:8080";
+//        static let ServerAPIUrl = "http://dev.chillsingtime.com";
     }
     
     struct UserDefaultKey {

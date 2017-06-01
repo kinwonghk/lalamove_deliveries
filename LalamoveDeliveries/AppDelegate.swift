@@ -7,17 +7,21 @@
 //
 
 import UIKit
+import SwiftyBeaver
 import GSMessages
+
+let log = SwiftyBeaver.self
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var isStartedUp = false;
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        startUp();
-        
+        self.window = UIWindow(frame: UIScreen.main.bounds);
+        self.window?.rootViewController = DeliveryListViewController()
+        self.window?.makeKeyAndVisible();
+        bootup();
         return true
     }
 
@@ -47,11 +51,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         showNetworkReachability()
     }
     
-    private func startUp(){
+    // MARK: - Bootup Method
+    
+    private func bootup(){
+        setupLogging()
         initNetworkReachbility()
-//        showNetworkReachability()
+        showNetworkReachability()
         NotificationCenter.default.addObserver(self, selector: #selector(statusManager), name: .flagsChanged, object: Network.reachability)
-        isStartedUp = true
+    }
+    
+    private func initNetworkReachbility(){
+        do {
+            Network.reachability = try Reachability(hostname: "www.google.com")
+            do {
+                try Network.reachability?.start()
+            } catch let error as Network.Error {
+                log.error(error)
+            } catch {
+                log.error(error)
+            }
+        } catch {
+            log.error(error)
+        }
     }
     
     private func showNetworkReachability(){
@@ -61,30 +82,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case .unreachable:
                 self.window?.rootViewController?.showMessage("Network Disconnect", type: .error, options: [.autoHide(false),.hideOnTap(false)])
             case .wifi:
-                if(self.isStartedUp){
-                    self.window?.rootViewController?.showMessage("Network Connected Wifi", type: .success)
-                }
+                self.window?.rootViewController?.hideMessage()
             case .wwan:
-                if(self.isStartedUp){
-                    self.window?.rootViewController?.showMessage("Network Connected wwan", type: .success)
-                }
+                self.window?.rootViewController?.hideMessage()
             }
         }
     }
     
-    private func initNetworkReachbility(){
-        do {
-            Network.reachability = try Reachability(hostname: "www.google.com")
-            do {
-                try Network.reachability?.start()
-            } catch let error as Network.Error {
-                print(error)
-            } catch {
-                print(error)
-            }
-        } catch {
-            print(error)
-        }
+    // For setup logging
+    private func setupLogging(){
+        let console = ConsoleDestination() // add log destinations.
+        console.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $T $C$L$c $n($l) $F: $M" // use custom format
+        console.minLevel = .verbose
+        log.addDestination(console) // add the destinations to SwiftyBeaver
     }
 }
 
