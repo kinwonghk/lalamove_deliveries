@@ -7,15 +7,17 @@
 //
 
 import UIKit
+import GSMessages
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var isStartedUp = false;
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        startUp();
+        
         return true
     }
 
@@ -40,7 +42,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    func statusManager(_ notification: NSNotification) {
+        showNetworkReachability()
+    }
+    
+    private func startUp(){
+        initNetworkReachbility()
+//        showNetworkReachability()
+        NotificationCenter.default.addObserver(self, selector: #selector(statusManager), name: .flagsChanged, object: Network.reachability)
+        isStartedUp = true
+    }
+    
+    private func showNetworkReachability(){
+        guard let status = Network.reachability?.status else { return }
+        DispatchQueue.main.async {
+            switch status {
+            case .unreachable:
+                self.window?.rootViewController?.showMessage("Network Disconnect", type: .error, options: [.autoHide(false),.hideOnTap(false)])
+            case .wifi:
+                if(self.isStartedUp){
+                    self.window?.rootViewController?.showMessage("Network Connected Wifi", type: .success)
+                }
+            case .wwan:
+                if(self.isStartedUp){
+                    self.window?.rootViewController?.showMessage("Network Connected wwan", type: .success)
+                }
+            }
+        }
+    }
+    
+    private func initNetworkReachbility(){
+        do {
+            Network.reachability = try Reachability(hostname: "www.google.com")
+            do {
+                try Network.reachability?.start()
+            } catch let error as Network.Error {
+                print(error)
+            } catch {
+                print(error)
+            }
+        } catch {
+            print(error)
+        }
+    }
 }
 
