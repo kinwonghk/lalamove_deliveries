@@ -13,17 +13,14 @@ class DeliveryListViewController: UIViewController {
     var offset = 1
     
     override func loadView() {
-        log.verbose("loadView")
         super.loadView()
+        log.verbose("loadView")
     }
     
     override func viewDidLoad() {
-        log.verbose("viewDidLoad")
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-//        loadDeliveries()
-        test()
+        log.verbose("viewDidLoad")
+        loadDeliveries()
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,23 +30,15 @@ class DeliveryListViewController: UIViewController {
     
     // MARK: - Load data from API
     func loadDeliveries(){
-        APIHelper.getDeliveries(offset: offset,
-                                completionHandler: { success in
-                                    if(success){
-                                        log.verbose("success")
-                                    }else{
-                                        log.verbose("fail")
-                                    }
-                                })
-    }
-    
-    func test(){
-        APIHelper.login(loginname: "test", password: "test", completionHandler: {success in
-            if(success){
-                log.info("success")
-            }else{
-                log.info("fail")
+        APIHelper.getDeliveries(offset: offset,completionHandler:
+            { (success, response) in
+                if(success){
+                    log.verbose("success")
+                }else{
+                    log.verbose("fail")
+                }
+                log.verbose("response:"+response)
             }
-        });
+        )
     }
 }

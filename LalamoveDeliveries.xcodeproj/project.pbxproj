@@ -13,7 +13,6 @@
 		3F4AD69A1EDF306300134D1C /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AD6991EDF306300134D1C /* DeliveryDetailViewController.swift */; };
 		3F6164331EE0555900E152FD /* DeliveryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6164321EE0555900E152FD /* DeliveryAPI.swift */; };
 		3F6164351EE05EC600E152FD /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6164341EE05EC600E152FD /* APIHelper.swift */; };
-		3F6164371EE091A100E152FD /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6164361EE091A100E152FD /* UserAPI.swift */; };
 		3F9496431EDE9D150035AD43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9496421EDE9D150035AD43 /* AppDelegate.swift */; };
 		3F9496451EDE9D150035AD43 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9496441EDE9D150035AD43 /* ViewController.swift */; };
 		3F9496481EDE9D150035AD43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F9496461EDE9D150035AD43 /* Main.storyboard */; };
@@ -42,7 +41,6 @@
 		3F4AD6991EDF306300134D1C /* DeliveryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewController.swift; sourceTree = "<group>"; };
 		3F6164321EE0555900E152FD /* DeliveryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryAPI.swift; sourceTree = "<group>"; };
 		3F6164341EE05EC600E152FD /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
-		3F6164361EE091A100E152FD /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		3F94963F1EDE9D150035AD43 /* LalamoveDeliveries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LalamoveDeliveries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9496421EDE9D150035AD43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F9496441EDE9D150035AD43 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,7 +90,6 @@
 		3F6164311EE0552800E152FD /* API */ = {
 			isa = PBXGroup;
 			children = (
-				3F6164361EE091A100E152FD /* UserAPI.swift */,
 				3F6164321EE0555900E152FD /* DeliveryAPI.swift */,
 			);
 			path = API;
@@ -401,7 +398,6 @@
 				3F9496431EDE9D150035AD43 /* AppDelegate.swift in Sources */,
 				3F9496671EDEA36A0035AD43 /* Reachability.swift in Sources */,
 				3F4AD6961EDF2E9800134D1C /* Constants.swift in Sources */,
-				3F6164371EE091A100E152FD /* UserAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

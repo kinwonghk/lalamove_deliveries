@@ -17,7 +17,7 @@ extension DeliveryAPI: TargetType{
     public var baseURL: URL {return URL(string: Constants.ServerConfig.ServerAPIUrl)!}
     public var path: String {
         switch self{
-        case .deliveries(_):
+        case .deliveries:
             return "/deliveries"
         }
     }
@@ -30,11 +30,11 @@ extension DeliveryAPI: TargetType{
     public var parameters: [String: Any]? {
         switch self {
         case .deliveries(let offset):
-            return ["offset": offset]
+            return ["offset":offset]
         }
     }
     public var parameterEncoding: ParameterEncoding {
-        return JSONEncoding.default
+        return URLEncoding.default
     }
     public var task: Task {
         switch self {
