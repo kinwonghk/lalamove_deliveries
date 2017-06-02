@@ -17,10 +17,6 @@ class APIHelper{
             case let .success(response):
                 let responseString = try? response.mapString()
                 let deliveriesString = responseString ?? ""
-                if(!deliveriesString.isEmpty){
-                    log.verbose(deliveriesString)
-                }
-                
                 if(response.statusCode == 200){
                     completionHandler(true,deliveriesString)
                 }else{

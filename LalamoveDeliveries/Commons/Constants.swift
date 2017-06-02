@@ -18,7 +18,7 @@ struct Constants {
 //        static let ServerAPIUrl = "http://dev.chillsingtime.com";
     }
     
-    struct UserDefaultKey {
-        static let UserToken = "USER_TOKEN";
+    struct GoogleMapAPI {
+        static let GMSKey = "AIzaSyC5d1ramn5RWatGZrBe-WPhJv0Q_HOJECU";
     }
 }

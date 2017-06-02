@@ -7,6 +7,8 @@ def libraries
   	pod 'SwiftyBeaver'
   	pod 'PureLayout'
 	pod 'GSMessages'
+	pod 'SDWebImage'
+	pod 'GoogleMaps'
 end
 
 target 'LalamoveDeliveries' do

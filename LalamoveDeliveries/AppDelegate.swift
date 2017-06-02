@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyBeaver
 import GSMessages
+import GoogleMaps
 
 let log = SwiftyBeaver.self
 
@@ -16,11 +17,15 @@ let log = SwiftyBeaver.self
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var navController: UINavigationController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         bootup();
         self.window = UIWindow(frame: UIScreen.main.bounds);
-        self.window?.rootViewController = DeliveryListViewController()
+        
+        navController = UINavigationController(rootViewController: DeliveryListViewController())
+        self.window?.rootViewController = navController
+//        self.window?.rootViewController = DeliveryDetailViewController()
         self.window?.makeKeyAndVisible();
         return true
     }
@@ -47,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    // Receive reachability notification
     func statusManager(_ notification: NSNotification) {
         showNetworkReachability()
     }
@@ -57,9 +63,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupLogging()
         initNetworkReachbility()
         showNetworkReachability()
+        initGMS()
         NotificationCenter.default.addObserver(self, selector: #selector(statusManager), name: .flagsChanged, object: Network.reachability)
     }
     
+    // Init network reachbility
     private func initNetworkReachbility(){
         do {
             Network.reachability = try Reachability(hostname: "www.google.com")
@@ -75,16 +83,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    // Display reachability on notification (called by statusManager when received )
     private func showNetworkReachability(){
         guard let status = Network.reachability?.status else { return }
         DispatchQueue.main.async {
             switch status {
             case .unreachable:
-                self.window?.rootViewController?.showMessage("Network Disconnect", type: .error, options: [.autoHide(false),.hideOnTap(false)])
+                self.navController?.topViewController?.showMessage("Network Disconnect", type: .error, options: [.autoHide(false),.hideOnTap(false)])
+//                self.window?.rootViewController?.showMessage("Network Disconnect", type: .error, options: [.autoHide(false),.hideOnTap(false)])
             case .wifi:
-                self.window?.rootViewController?.hideMessage()
+//                self.window?.rootViewController?.hideMessage()
+                self.navController?.topViewController?.hideMessage()
             case .wwan:
-                self.window?.rootViewController?.hideMessage()
+                self.navController?.topViewController?.hideMessage()
             }
         }
     }
@@ -95,6 +106,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         console.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $T $C$L$c $n($l) $F: $M" // use custom format
         console.minLevel = .verbose
         log.addDestination(console) // add the destinations to SwiftyBeaver
+    }
+    
+    // For init Google Maps services
+    private func initGMS(){
+        GMSServices.provideAPIKey(Constants.GoogleMapAPI.GMSKey)
     }
 }
 
