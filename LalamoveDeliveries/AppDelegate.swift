@@ -21,12 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         bootup();
-        self.window = UIWindow(frame: UIScreen.main.bounds);
-        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
         navController = UINavigationController(rootViewController: DeliveryListViewController())
         self.window?.rootViewController = navController
-//        self.window?.rootViewController = DeliveryDetailViewController()
-        self.window?.makeKeyAndVisible();
+        self.window?.makeKeyAndVisible()
         return true
     }
 
@@ -86,16 +84,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Display reachability on notification (called by statusManager when received )
     private func showNetworkReachability(){
         guard let status = Network.reachability?.status else { return }
-        DispatchQueue.main.async {
-            switch status {
-            case .unreachable:
-                self.navController?.topViewController?.showMessage("No Internet Connection", type: .error, options: [.autoHide(false),.hideOnTap(false)])
-//                self.window?.rootViewController?.showMessage("Network Disconnect", type: .error, options: [.autoHide(false),.hideOnTap(false)])
-            case .wifi:
-//                self.window?.rootViewController?.hideMessage()
-                self.navController?.topViewController?.hideMessage()
-            case .wwan:
-                self.navController?.topViewController?.hideMessage()
+        if (status == .unreachable){
+            DispatchQueue.main.async {
+                self.navController?.topViewController?.showMessage("No Internet Connection", type: .error, options: [.autoHide(true),.hideOnTap(true)])
             }
         }
     }

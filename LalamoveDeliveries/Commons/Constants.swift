@@ -10,7 +10,7 @@ import Foundation
 
 struct Constants {
     struct SystemInfo {
-        static let Version = "0.1"
+        static let Version = "1.0"
     }
     
     struct ServerConfig {
