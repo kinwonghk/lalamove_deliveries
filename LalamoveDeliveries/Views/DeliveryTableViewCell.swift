@@ -12,14 +12,14 @@ import PureLayout
 import SDWebImage
 
 class DeliveryTableViewCell: UITableViewCell{
-    var didSetupConstraints = false;
+    var didSetupConstraints = false
     
     let iconView:UIImageView = {
-        let iconView = UIImageView();
-        iconView.backgroundColor = UIColor(white: 1, alpha: 0);
+        let iconView = UIImageView()
+        iconView.backgroundColor = UIColor(white: 1, alpha: 0)
         iconView.contentMode = .scaleAspectFit
-        return iconView;
-    }();
+        return iconView
+    }()
     
     let addressTitleLabel:UILabel = {
         let label = UILabel()
@@ -27,13 +27,13 @@ class DeliveryTableViewCell: UITableViewCell{
         label.text = "Address:"
         label.textColor = UIColor.gray
         return label
-    }();
+    }()
     
     let descLabel:UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15)
         return label
-    }();
+    }()
     
     let addressLabel:UILabel = {
         let label = UILabel()
@@ -51,7 +51,7 @@ class DeliveryTableViewCell: UITableViewCell{
         self.contentView.addSubview(self.addressTitleLabel)
         self.contentView.addSubview(self.addressLabel)
         
-        self.setNeedsUpdateConstraints();
+        self.setNeedsUpdateConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -83,7 +83,7 @@ class DeliveryTableViewCell: UITableViewCell{
             
             didSetupConstraints = true;
         }
-        super.updateConstraints();
+        super.updateConstraints()
     }
     
     func setContent(_ delivery:Delivery){

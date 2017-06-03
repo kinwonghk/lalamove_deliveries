@@ -89,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.main.async {
             switch status {
             case .unreachable:
-                self.navController?.topViewController?.showMessage("Network Disconnect", type: .error, options: [.autoHide(false),.hideOnTap(false)])
+                self.navController?.topViewController?.showMessage("No Internet Connection", type: .error, options: [.autoHide(false),.hideOnTap(false)])
 //                self.window?.rootViewController?.showMessage("Network Disconnect", type: .error, options: [.autoHide(false),.hideOnTap(false)])
             case .wifi:
 //                self.window?.rootViewController?.hideMessage()

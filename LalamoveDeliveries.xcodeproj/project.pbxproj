@@ -552,6 +552,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E435A519B1FFE28F4EB3CD42 /* Pods-LalamoveDeliveries.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LF8YXJ6TDE;
 				INFOPLIST_FILE = LalamoveDeliveries/Info.plist;
@@ -567,6 +568,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9786E341F4E57EFE98D8F316 /* Pods-LalamoveDeliveries.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LF8YXJ6TDE;
 				INFOPLIST_FILE = LalamoveDeliveries/Info.plist;

@@ -16,6 +16,7 @@ PODS:
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
+  - StatusProvider (1.2.4)
   - SwiftyBeaver (1.2.2)
 
 DEPENDENCIES:
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - Moya (= 8.0.5)
   - PureLayout
   - SDWebImage
+  - StatusProvider
   - SwiftyBeaver
 
 SPEC CHECKSUMS:
@@ -35,8 +37,9 @@ SPEC CHECKSUMS:
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  StatusProvider: ba18d6d93c1d2bafec88dc17d8e2fe07df6cfbe8
   SwiftyBeaver: 90a39e3dc5136b7285f2e4c870b107e3933b8b84
 
-PODFILE CHECKSUM: 7f4ed1bccc8a84492bac806b8b4420544ceb4044
+PODFILE CHECKSUM: 0452214ce2e54202251d4c876130902652388417
 
 COCOAPODS: 1.1.1

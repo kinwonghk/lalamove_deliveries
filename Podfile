@@ -7,6 +7,7 @@ def libraries
   	pod 'SwiftyBeaver'
   	pod 'PureLayout'
 	pod 'GSMessages'
+	pod 'StatusProvider'
 	pod 'SDWebImage'
 	pod 'GoogleMaps'
 end

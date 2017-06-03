@@ -14,7 +14,7 @@ import GoogleMaps
 class DeliveryDetailViewController: UIViewController {
     let delivery:Delivery?
     var mapView:GMSMapView?
-    var didSetupConstraints = false;
+    var didSetupConstraints = false
     
     let descTitleLabel:UILabel = {
         let label = UILabel()
@@ -22,7 +22,7 @@ class DeliveryDetailViewController: UIViewController {
         label.text = "Description:"
         label.textColor = UIColor.gray
         return label
-    }();
+    }()
     
     let descLabel:UILabel = {
         let label = UILabel()
@@ -30,7 +30,7 @@ class DeliveryDetailViewController: UIViewController {
         label.numberOfLines = 0
         label.sizeToFit()
         return label
-    }();
+    }()
     
     let addressTitleLabel:UILabel = {
         let label = UILabel()
@@ -38,7 +38,7 @@ class DeliveryDetailViewController: UIViewController {
         label.text = "Address:"
         label.textColor = UIColor.gray
         return label
-    }();
+    }()
     
     let addressLabel:UILabel = {
         let label = UILabel()
@@ -46,7 +46,14 @@ class DeliveryDetailViewController: UIViewController {
         label.numberOfLines = 0
         label.sizeToFit()
         return label
-    }();
+    }()
+    
+    let iconView:UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = UIColor(white: 1, alpha: 0)
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
     
     init(_ delivery:Delivery){
         self.delivery = delivery
@@ -60,13 +67,17 @@ class DeliveryDetailViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
+    deinit {
+        self.mapView = nil
+    }
+    
     override func loadView() {
         super.loadView()
         
         self.title = "Deliver Details"
         
         self.view = UIView();
-        self.view.backgroundColor = UIColor(white: 1, alpha: 1);
+        self.view.backgroundColor = UIColor(white: 1, alpha: 1)
         
         guard self.delivery != nil else { return }
         let camera = GMSCameraPosition.camera(withLatitude: self.delivery!.latitude, longitude: self.delivery!.longitude, zoom: 17.0)
@@ -76,6 +87,8 @@ class DeliveryDetailViewController: UIViewController {
         marker.map = mapView
         
         self.view.addSubview(self.mapView!)
+        self.view.addSubview(self.iconView)
+        self.iconView.sd_setImage(with: URL(string:self.delivery!.imageUrl), placeholderImage: UIImage(named:"PlaceHolder"))
         self.view.addSubview(self.descTitleLabel)
         self.view.addSubview(self.descLabel)
         self.descLabel.text = self.delivery!.description
@@ -97,10 +110,15 @@ class DeliveryDetailViewController: UIViewController {
             self.mapView!.autoPinEdge(toSuperviewEdge: .left)
             self.mapView!.autoPinEdge(toSuperviewEdge: .top)
             self.mapView!.autoPinEdge(toSuperviewEdge: .right)
-            self.mapView!.autoSetDimension(.height, toSize: 400)
+            self.mapView!.autoSetDimension(.height, toSize: 350)
+            
+            // set iconView
+            self.iconView.autoPinEdge(.top, to: .bottom, of: self.mapView!, withOffset: 10.0)
+            self.iconView.autoPinEdge(toSuperviewEdge: .left)
+            self.iconView.autoSetDimensions(to: CGSize(width:80.0, height:80.0))
             
             // set descTitleLabel
-            self.descTitleLabel.autoPinEdge(.top, to: .bottom, of: self.mapView!, withOffset: 10.0)
+            self.descTitleLabel.autoPinEdge(.top, to: .bottom, of: self.iconView, withOffset: 10.0)
             self.descTitleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 10.0)
             self.descTitleLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 10.0)
             
@@ -120,9 +138,9 @@ class DeliveryDetailViewController: UIViewController {
             self.addressLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 10.0)
             
             
-            didSetupConstraints = true;
+            didSetupConstraints = true
         }
-        super.updateViewConstraints();
+        super.updateViewConstraints()
     }
     
     override func didReceiveMemoryWarning() {

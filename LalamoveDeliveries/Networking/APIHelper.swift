@@ -20,7 +20,7 @@ class APIHelper{
                 if(response.statusCode == 200){
                     completionHandler(true,deliveriesString)
                 }else{
-                    log.error("connect success but return fail")
+                    log.error("connect success server return fail")
                     completionHandler(false,deliveriesString)
                 }
             default:
@@ -29,32 +29,4 @@ class APIHelper{
             }
         }
     }
-    
-//    class func login(loginname: String, password: String, completionHandler:@escaping(Bool)->()){
-//        let userProvider = MoyaProvider<UserAPI>();
-//        userProvider.request(.userProfile){ result in
-//            switch result{
-//            case let .success(response):
-//                log.debug("statusCode \(response.statusCode)")
-//                if(response.statusCode == 200){ // Server response login success
-//                    let responseString = try? response.mapString()
-//                    var token = responseString ?? ""
-//                    if(!token.isEmpty){
-//                        log.debug("token \(token)")
-//                        token = token.replacingOccurrences(of: "\"", with: "")
-//                        completionHandler(true);
-//                    }else{
-//                        log.error("No token found from server response")
-//                        completionHandler(false);
-//                    }
-//                }else{ // Server response login fail
-//                    log.error("Server respon: \(response.mapString)")
-//                    completionHandler(false)
-//                }
-//            default:
-//                log.error("Login fail");
-//                completionHandler(false)
-//            }
-//        }
-//    }
 }
