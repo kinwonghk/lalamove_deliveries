@@ -2,7 +2,7 @@
 Lalamove Mobile Developer Technical Challenge (iOS)
 
 ### Feature
-1. Retrieve deliveries info from server
+1. Retrieve deliveries information from server
 2. List deliveries information
 3. Display delivery information in detail & show on map
 4. Able to work offline after initial use.
